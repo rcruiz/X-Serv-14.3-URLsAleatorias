@@ -3,7 +3,7 @@
 """
 Servidor de URLs Aleatorias
 Rosa Cristina Ruiz Rivas
-Alumna de SAT
+Alumna de SARO
 """
 
 import socket
