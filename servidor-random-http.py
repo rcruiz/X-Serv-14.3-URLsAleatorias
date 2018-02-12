@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 
 """
 Servidor de URLs Aleatorias
@@ -21,17 +21,18 @@ mySocket.listen(5)
 # Acepta las conexiones, lee datos entrantes y responde en una pagina HTML
 try:
     while True:
-        print 'Waiting for connections'
+        print('Waiting for connections')
         (recvSocket, address) = mySocket.accept()
-        print 'Request received:'
-        print recvSocket.recv(2048)
+        print('Request received:')
+        print(recvSocket.recv(2048))
         # Genera las URLs aleatorias
         randomURL = str(random.randint(0, 1000000000))
         newURL = "http://localhost:" + str(port) + "/" + randomURL
-        recvSocket.send("HTTP/1.1 200 OK\r\n\r\n" +
-                        "<html><body><p>Hola. " + '<a href="' + newURL + '">' +
-                        "Dame otra''</a>" + "</p>" + "</body></html>" + "\r\n")
+        recvSocket.send(b"HTTP/1.1 200 OK\r\n\r\n" +
+                        b"<html><body><p>Hola. " +
+                        b'<a href="' + bytes(newURL, 'utf-8') + b'">' +
+                        b"Dame otra </a></p></body></html>\r\n")
         recvSocket.close()
 except KeyboardInterrupt:
-    print "Closing binded socket"
+    print("Closing binded socket")
     mySocket.close()
